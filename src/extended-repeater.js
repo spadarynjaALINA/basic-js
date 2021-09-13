@@ -16,32 +16,35 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function repeater(str, options) {
-  if (!options.additionSeparator) {
+  str = str.toString()
+  if (!options.additionSeparator && options.addition) {
     options.additionSeparator="|"
+  } else {
+    options.additionSeparator=""
   }
-  let as = options.additionSeparator.toString()
+  let as = String(options.additionSeparator)
 
   if (!options.separator) {
     options.separator="+"
   }
 
-  let s = options.separator.toString()
+  let s = String(options.separator)
  
   if (!options.addition) {
     options.addition=""
   }
   
-  let a = options.addition.toString()
+  let a = String(options.addition)
   let addit = ''
-  for(let j = 0; j < options.additionRepeatTimes; j++){
+  for(let j = 1; j <=options.additionRepeatTimes; j++){
     addit+= as + a
   } 
-  a=a+addit
+  //a=a+addit
   let r = ''
   
-  for (let i = 0; i < options.repeatTimes-1 ; i++){
-    r += s + str +a
+  for (let i = 1; i <= options.repeatTimes -1; i++){
+    r += str +addit+ s 
   }
-let result = str  +r
+let result = r+ str +addit
   return result
 }
